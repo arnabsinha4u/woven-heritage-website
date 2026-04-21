@@ -1,4 +1,9 @@
 {
+  "name": "woven-heritage-website",
+  "compatibility_date": "2026-04-21",
+  "assets": {
+    "directory": "./dist"
+  },
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
