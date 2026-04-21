@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #fcf9f4;
+  --color-surface: #fcf9f4;
+  --color-surface-variant: #e5e2dd;
+  --color-surface-low: #f6f3ee;
+  --color-surface-lowest: #ffffff;
+  --color-surface-high: #ebe8e3;
+  --color-surface-highest: #e5e2dd;
+  --color-primary: #91472b;
+  --color-primary-container: #af5f41;
+  --color-secondary: #56642b;
+  --color-secondary-container: #d6e7a1;
+  --color-tertiary: #625c48;
+  --color-outline: #87736c;
+  --color-outline-ghost: rgba(218, 193, 185, 0.4);
+  --color-on-surface: #1c1c19;
+  --color-on-surface-variant: #54433d;
+  --color-on-primary: #ffffff;
+  --color-on-secondary-container: #5a682f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-on-surface font-body antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at top right, rgba(214, 231, 161, 0.16), transparent 18rem),
+    radial-gradient(circle at left bottom, rgba(255, 219, 207, 0.3), transparent 20rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 30rem);
+}
+
+::selection {
+  background: rgba(255, 181, 155, 0.7);
+  color: #380d00;
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto max-w-editorial px-4 sm:px-6 lg:px-8;
+  }
+
+  .soft-panel {
+    @apply rounded-lounge bg-surface-low shadow-ambient;
+  }
+
+  .paper-panel {
+    @apply rounded-lounge bg-surface-lowest shadow-ambient;
+  }
+
+  .ghost-outline {
+    border: 1px solid var(--color-outline-ghost);
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-primary-wash px-6 py-3 text-sm font-semibold text-on-primary transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none;
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-on-secondary-container transition-colors duration-300 focus:outline-none;
+    background-color: var(--color-secondary-container);
+  }
+
+  .cta-tertiary {
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-primary underline underline-offset-8 transition-colors duration-300 hover:text-primary-container focus:outline-none;
+    text-decoration-color: rgba(145, 71, 43, 0.25);
+  }
+
+  .cta-primary:focus-visible {
+    box-shadow: 0 0 0 2px rgba(145, 71, 43, 0.3), 0 0 0 4px var(--color-background);
+  }
+
+  .cta-secondary:focus-visible {
+    box-shadow: 0 0 0 2px rgba(86, 100, 43, 0.28), 0 0 0 4px var(--color-background);
+  }
+
+  .cta-secondary:hover {
+    background-color: rgba(214, 231, 161, 0.8);
+  }
+
+  .cta-tertiary:focus-visible {
+    box-shadow: 0 0 0 2px rgba(145, 71, 43, 0.2), 0 0 0 4px var(--color-background);
+    border-radius: 9999px;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-on-secondary-container;
+    background-color: rgba(214, 231, 161, 0.7);
+  }
+
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.28em] text-primary;
+  }
+
+  .editorial-title {
+    @apply font-headline text-4xl leading-tight text-on-surface sm:text-5xl lg:text-6xl;
+  }
+
+  .content-copy {
+    @apply text-base leading-7 text-on-surface-variant sm:text-lg;
+  }
+
+  .grain {
+    position: relative;
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)),
+      radial-gradient(rgba(28, 28, 25, 0.03) 0.7px, transparent 0.7px);
+    background-size: auto, 12px 12px;
+    opacity: 0.7;
+    mix-blend-mode: multiply;
+  }
+
+  .stitched-frame {
+    @apply overflow-hidden rounded-stitched bg-surface-low shadow-float;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

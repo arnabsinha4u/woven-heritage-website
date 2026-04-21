@@ -1,0 +1,19 @@
+---
+interface Props {
+  kicker?: string;
+  title: string;
+  description?: string;
+  align?: "left" | "center";
+}
+
+const { kicker, title, description, align = "left" } = Astro.props;
+const centered = align === "center";
+---
+
+<div class:list={["space-y-4", centered && "mx-auto text-center"]}>
+  {kicker && <p class="section-kicker">{kicker}</p>}
+  <h2 class="font-headline text-4xl leading-tight text-on-surface sm:text-5xl">{title}</h2>
+  {description && (
+    <p class:list={["content-copy max-w-2xl", centered && "mx-auto"]}>{description}</p>
+  )}
+</div>

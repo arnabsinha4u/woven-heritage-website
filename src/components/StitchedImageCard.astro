@@ -1,0 +1,32 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  note: string;
+  attribution: string;
+  productSlug?: string;
+}
+
+const { src, alt, note, attribution, productSlug } = Astro.props;
+---
+
+<div class="relative">
+  <div class="stitched-frame grain">
+    <img
+      src={src}
+      alt={alt}
+      class="h-full w-full object-cover"
+      loading="eager"
+      data-image-slot="hero"
+      data-product-slug={productSlug}
+    />
+  </div>
+
+  <div class="absolute -bottom-6 right-4 max-w-xs rounded-lounge bg-surface-highest/95 p-5 shadow-float ghost-outline sm:right-6 sm:p-6">
+    <p class="font-headline text-lg italic leading-7 text-on-surface">{note}</p>
+    <p class="mt-4 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-primary">{attribution}</p>
+  </div>
+
+  <div class="absolute -left-5 bottom-10 h-24 w-24 rounded-[2rem] bg-secondary-container/70 blur-xl sm:h-32 sm:w-32"></div>
+  <div class="absolute -right-3 -top-4 h-20 w-20 rounded-full bg-white/90 blur-xl sm:h-28 sm:w-28"></div>
+</div>

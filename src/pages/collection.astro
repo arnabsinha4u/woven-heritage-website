@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content";
+import ProductCard from "../components/ProductCard.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { collectionContent, site } from "../data/site";
+import "../styles/global.css";
+
+const products = await getCollection("products");
+const featuredProduct = products.find((product) => product.slug === collectionContent.featureSlug);
+const listProducts = collectionContent.listSlugs
+  .map((slug) => products.find((product) => product.slug === slug))
+  .filter(Boolean);
+---
+
+<BaseLayout title="Collection">
+  <SiteHeader />
+
+  <main class="page-shell py-12 sm:py-16">
+    <section class="space-y-8">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <SectionHeading
+          kicker={collectionContent.kicker}
+          title={collectionContent.title}
+          description={collectionContent.intro}
+        />
+
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-on-surface-variant">Texture Study</span>
+          {collectionContent.chips.map((chip, index) => (
+            <span class:list={["chip", index !== 0 && "bg-surface-high text-on-surface-variant"]}>{chip}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-14 grid gap-8 md:grid-cols-12 md:items-start">
+      <div class="md:col-span-8">
+        {featuredProduct && <ProductCard product={featuredProduct} />}
+      </div>
+
+      <aside class="paper-panel relative overflow-hidden p-8 md:col-span-4">
+        <div class="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-secondary-container/40 blur-2xl"></div>
+        <p class="font-headline text-3xl italic leading-tight text-primary">{collectionContent.quote}</p>
+        <p class="mt-6 text-sm leading-7 text-on-surface-variant">{collectionContent.quoteBody}</p>
+      </aside>
+    </section>
+
+    <section class="mt-10 grid gap-6 lg:grid-cols-3">
+      {listProducts.map((product) => (
+        <ProductCard product={product!} variant="compact" />
+      ))}
+    </section>
+
+    <section class="relative mt-20 overflow-hidden rounded-[2.6rem]">
+      <img
+        src="/images/editorial/workshop-visit.jpg"
+        alt="Artisan hands working under soft light in the Woven Heritage workshop."
+        class="h-[28rem] w-full object-cover brightness-[0.45]"
+        loading="lazy"
+        data-image-slot="collection-cta"
+      />
+      <div class="absolute inset-0 flex items-end justify-center p-6 sm:items-center">
+        <div class="max-w-2xl rounded-[2.2rem] bg-white/12 p-8 text-center text-white backdrop-blur-md sm:p-10">
+          <p class="section-kicker text-white/75">Visit</p>
+          <h2 class="mt-4 font-headline text-4xl leading-tight sm:text-5xl">{collectionContent.visitTitle}</h2>
+          <p class="mt-5 text-base leading-7 text-white/80 sm:text-lg">{collectionContent.visitBody}</p>
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="/#story" class="cta-secondary">Read the Story</a>
+            <a href="/" class="rounded-full border border-white/40 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-white/10">Return Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

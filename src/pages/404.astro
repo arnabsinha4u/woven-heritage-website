@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout title="Not Found">
+  <SiteHeader />
+
+  <main class="page-shell py-24 text-center">
+    <p class="section-kicker">404</p>
+    <h1 class="mt-4 font-headline text-5xl text-on-surface sm:text-6xl">The thread slipped away.</h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">
+      The page you were looking for is not part of the current archive. Return to the collection and continue from there.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a href="/" class="cta-primary">Return Home</a>
+      <a href="/collection" class="cta-secondary">Browse Collection</a>
+    </div>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

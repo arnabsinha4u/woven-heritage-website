@@ -1,0 +1,26 @@
+---
+import { navLinks, site } from "../data/site";
+---
+
+<footer class="mt-20 rounded-t-[2.5rem] bg-surface-high py-14 sm:mt-24">
+  <div class="page-shell flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+    <div class="max-w-sm space-y-3">
+      <p class="font-headline text-2xl italic text-primary">{site.name}</p>
+      <p class="text-sm leading-6 text-on-surface-variant">
+        Preserving the soul of handmade craft through tactile stories, heirloom studies, and intentionally slow design.
+      </p>
+      <p class="text-xs uppercase tracking-[0.2em] text-on-surface-variant">© 2026 {site.name}. {site.tagline}</p>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="rounded-full bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant transition-colors duration-300 hover:bg-secondary-container/70 hover:text-on-secondary-container"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>
